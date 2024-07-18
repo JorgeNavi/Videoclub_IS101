@@ -10,11 +10,7 @@ class Director:
         return f"Director ({self.id}): {self.nombre}"
     
     def __eq__(self, other: object) -> bool:
-        other = Director()
-        if self.id == other:
-            return True
-        else:
-            return False
+        return self.nombre == other.nombre
 
 class DAO(ABC):
     """
