@@ -25,6 +25,17 @@ class Pelicula:
         self.id = id
         self.director = director
 
+    def __repr__(self) -> str:
+        return f"Pelicula ({self.id}: {self.titulo})"
+    
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, self.__class__):
+            return self.id == other.id and self.titulo == other.titulo
+        return False
+    
+    def __hash__(self):
+        return hash((self.id, self.titulo))
+
     @property    
     def director(self):
         return self._director
