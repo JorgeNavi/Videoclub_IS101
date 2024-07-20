@@ -31,11 +31,13 @@ class Director(Model):
     
 
 class Pelicula(Model):
-    def __init__(self, titulo: str, sinopsis: str, director: object, id: int = -1):
+    def __init__(self, titulo: str, genero: object, sinopsis: str, director: object, id: int = -1):
         self.titulo = titulo
         self.sinopsis = sinopsis
         self.id = id
         self.director = director
+        self.genero = genero
+        self.num_copias = 0
 
     @classmethod
     def create_from_dict(cls, diccionario):
@@ -68,8 +70,55 @@ class Pelicula(Model):
             self._id_director = value
         else:
             raise TypeError(f"{value} debe ser un entero o instancia de Director")
+        
+    def añadir_copia(self, n: int):
+        copia = Copia(n)
+        self.num_copias += copia.num_copias
+        return self.num_copias
 
         
+
+class Genero(Model):
+
+    def __init__(self, tipo: str):
+        self.tipo = tipo
+
+    @classmethod
+    def create_from_dict(cls, diccionario):
+        return cls(diccionario["genero"])
+
+    def __repr__(self) -> str:
+        return f"Genero: {self.tipo}"
+    
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, self.__class__):
+            return self.tipo == other.tipo
+        return False
+    
+    def __hash__(self):
+        return hash(self.tipo)
+    
+class Copia(Model):
+
+    def __init__(self, num_copias: int):
+        self.num_copias = num_copias
+
+    @classmethod
+    def create_from_dict(cls, diccionario):
+        return cls(diccionario["num_copias"])
+
+    def __repr__(self) -> str:
+        return f"num_copias {self.num_copias}"
+    
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, self.__class__):
+            return self.num_copias == other.num_copias
+        return False
+    
+    def __hash__(self):
+        return hash(self.num_copias)
+
+
 
 
 class DAO(ABC):
@@ -115,3 +164,9 @@ class DAO_CSV_Director(DAO_CSV):
     
 class DAO_CSV_Pelicula(DAO_CSV):
     model = Pelicula
+
+class DAO_CSV_Genero(DAO_CSV):
+    model = Genero
+
+class DAO_CSV_Copia(DAO_CSV):
+    model = Copia
