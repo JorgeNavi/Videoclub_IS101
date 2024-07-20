@@ -98,6 +98,7 @@ def test_añadir_copia():
 
 def test_DAO_copias_traer_todos():
     dao = DAO_CSV_Copia("tests/data/num_copias_prueba.csv")
+    copia = Copia(5)
     copias = dao.todos()
     assert len(copias) == 5
-    assert copias[3] == Copia(5)
+    assert copias[3] == copia

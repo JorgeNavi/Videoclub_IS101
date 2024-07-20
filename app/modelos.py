@@ -108,7 +108,7 @@ class Copia(Model):
         return cls(diccionario["num_copias"])
 
     def __repr__(self) -> str:
-        return f"num_copias {self.num_copias}"
+        return f"num_copias: {self.num_copias}"
     
     def __eq__(self, other: object) -> bool:
         if isinstance(other, self.__class__):
