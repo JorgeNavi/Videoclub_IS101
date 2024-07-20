@@ -1,4 +1,4 @@
-from app.modelos import Director, DAO_CSV_Director, Pelicula, DAO_CSV_Pelicula, Genero, DAO_CSV_Genero
+from app.modelos import Director, DAO_CSV_Director, Pelicula, DAO_CSV_Pelicula, Genero, DAO_CSV_Genero, Copia, DAO_CSV_Copia
 
 def test_create_director():
     director = Director("Robert Redford")
@@ -86,4 +86,18 @@ def test_DAO_generos_traer_todos():
 
 
 def test_create_copia():
-    pass
+    
+    copias = Copia(15)
+    
+    assert copias.num_copias == 15
+
+def test_añadir_copia():
+    pelicula = Pelicula("El señor de los anillos", "Fantasia epica", "Sauron es mu malo",  9)
+    pelicula.añadir_copia(15)
+    assert pelicula.num_copias == 15
+
+def test_DAO_copias_traer_todos():
+    dao = DAO_CSV_Copia("tests/data/num_copias_prueba.csv")
+    copias = dao.todos()
+    assert len(copias) == 5
+    assert copias[3] == Copia(5)
