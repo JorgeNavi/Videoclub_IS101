@@ -105,7 +105,7 @@ class Copia(Model):
 
     @classmethod
     def create_from_dict(cls, diccionario):
-        return cls(diccionario["num_copias"])
+        return cls(int(diccionario["num_copias"]))
 
     def __repr__(self) -> str:
         return f"num_copias: {self.num_copias}"
