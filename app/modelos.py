@@ -5,7 +5,7 @@ class Model(ABC):
     
     @classmethod
     @abstractmethod
-    def create_from_dict(cls, diccionario):#cls es la forma estandar de poner la clase en el metodo de clase. los metodos de instancia llevan self, y los metodos de clase llevan cls
+    def create_from_dict(cls, diccionario):#cls es la forma estandar de poner la propia clase en el metodo de clase. los metodos de instancia llevan self, y los metodos de clase llevan cls
         pass
 
 
@@ -15,7 +15,7 @@ class Director(Model):
         self.id = id
 
     @classmethod
-    def create_from_dict(cls, diccionario):#cls es la forma estandar de poner la clase en el metodo de clase. los metodos de instancia llevan self, y los metodos de clase llevan cls
+    def create_from_dict(cls, diccionario):#cls es la forma estandar de poner la propia clase en el metodo de clase. los metodos de instancia llevan self, y los metodos de clase llevan cls
         return cls(diccionario["nombre"], int(diccionario["id"]))
 
     def __repr__(self) -> str:
